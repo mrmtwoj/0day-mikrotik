@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 
-import sys, hashlib
+import sys
+import hashlib
+
 
 def decrypt_password(user, pass_enc):
     key = hashlib.md5(user + b"283i4jfkai3389").digest()
 
     passw = ""
     for i in range(0, len(pass_enc)):
-        passw += chr(pass_enc[i] ^ key[i % len(key)])
-    
+        passw += chr(pass_enc[i] ^ ord(key[i % len(key)]))
+
     return passw.split("\x00")[0]
+
 
 def extract_user_pass_from_entry(entry):
     user_data = entry.split(b"\x01\x00\x00\x21")[1]
@@ -23,8 +26,8 @@ def extract_user_pass_from_entry(entry):
 
     return username, password
 
-def get_pair(data):
 
+def get_pair(data):
     user_list = []
 
     entries = data.split(b"M2")[1:]
@@ -35,18 +38,20 @@ def get_pair(data):
             continue
 
         pass_plain = decrypt_password(user, pass_encrypted)
-        user  = user.decode("ascii")
+        user = user.decode("ascii")
 
         user_list.append((user, pass_plain))
 
     return user_list
 
+
 def dump(data):
     user_pass = get_pair(data)
     for u, p in user_pass:
-        print("User:", u)
-        print("Pass:", p)
-        print()
+        print("User: %s" % u)
+        print("Pass: %s" % p)
+        print('')
+
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
@@ -55,7 +60,7 @@ if __name__ == "__main__":
         else:
             user_file = open(sys.argv[1], "rb").read()
         dump(user_file)
-         
+
     else:
         print("Usage:")
         print("\tFrom file: \t", sys.argv[0], "user.dat")
