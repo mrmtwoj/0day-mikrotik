@@ -1,7 +1,9 @@
 # Project Information
-<p><b><h6>Name Project :</b>0day Mikrotik</p>
+<p><b><h6>Name Project :</b>0day Mikrotik | Mikrotik WinBox Exploit </p>
+<p><b>CVE :</b>CVE-2018-14847</p>
 <p><b>Last version  :</b>1.0.0</p>
 <p><b>Last updated :</b> 25/07/2018</p>
+<p><b>Defective version: </b>Mikrotik WinBox 6.42</p>  
 <p><b>Programming language :</b> Python</p>
 <p><b>youtube : </b>https://youtu.be/h6JSNFhQUN8</p>
 <p><b>Company name : </b><a target="_black" href="http://acyber.ir">acyber</a> (IT Security Lab Iran)</p></h6>
